@@ -9,18 +9,10 @@ require 'dbcon.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Student View</title>
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
-
-  <nav aria-label="breadcrumb" class="mt-3">
-    <ol class="breadcrumb container">
-      <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">View Student</li>
-    </ol>
-  </nav>
 
   <div class="container view-user p-5">
     <div id="studentContent" class="d-none">
@@ -80,18 +72,17 @@ require 'dbcon.php';
         })
         .then(data => {
           if (data.success) {
-            // Show student content container
+            
             document.getElementById('studentContent').classList.remove('d-none');
             document.getElementById('message').textContent = '';
 
-            // Fill student data
+           
             document.getElementById('studentName').textContent = data.student.name;
             document.getElementById('name').textContent = data.student.name;
             document.getElementById('email').textContent = data.student.email;
             document.getElementById('phone').textContent = data.student.phone;
             document.getElementById('course').textContent = data.student.course;
           } else {
-            // Show error message
             document.getElementById('message').textContent = data.message || "No Such Id Found";
           }
         })

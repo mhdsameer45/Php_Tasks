@@ -20,8 +20,6 @@ require 'dbcon.php';
 <body>
     <div class="container mt-4">
 
-        <?php include('message.php'); ?>
-
         <div class="row mb-3">
             <div class="col-6">
                 <h1>Students Details</h1>
@@ -89,7 +87,7 @@ require 'dbcon.php';
                     .then(data => {
                         alert(data.message);
                         if (data.success) {
-                            location.reload(); // Refresh the list
+                            location.reload(); 
                         }
                     })
                     .catch(error => {

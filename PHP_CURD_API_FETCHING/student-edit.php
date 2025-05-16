@@ -5,42 +5,43 @@ require 'dbcon.php';
 
 <!doctype html>
 <html lang="en">
+
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
   <title>Student Edit</title>
 </head>
+
 <body>
   <div class="container mt-5">
 
-    <!-- Show session message if available -->
+
     <?php if (isset($_SESSION['message'])): ?>
       <div class="alert alert-<?= $_SESSION['msg_type'] ?? 'info' ?> alert-dismissible fade show" role="alert">
         <?= htmlspecialchars($_SESSION['message']) ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       <?php
-        unset($_SESSION['message']);
-        unset($_SESSION['msg_type']);
+      unset($_SESSION['message']);
+      unset($_SESSION['msg_type']);
       ?>
     <?php endif; ?>
+
+
 
     <div class="row">
       <div class="col-md-12">
         <div class="card">
+
           <div class="card-header">
             <h4>
               Student Edit
               <a href="index.php" class="btn btn-danger float-end">BACK</a>
             </h4>
           </div>
+
           <div class="card-body">
-            <!-- Form -->
             <form id="editStudentForm">
               <input type="hidden" name="student_id" id="student_id" />
 
@@ -67,7 +68,7 @@ require 'dbcon.php';
               </div>
             </form>
 
-            <!-- Placeholder for error message if student not found -->
+
             <div id="errorMessage" class="alert alert-danger d-none">No Such Id Found</div>
           </div>
         </div>
@@ -75,16 +76,14 @@ require 'dbcon.php';
     </div>
   </div>
 
-  <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- JavaScript to fetch and update -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const urlParams = new URLSearchParams(window.location.search);
       const studentId = urlParams.get("id");
 
-      // Load existing data
+
       if (studentId) {
         fetch(`code.php?id=${studentId}`)
           .then(res => res.json())
@@ -104,9 +103,9 @@ require 'dbcon.php';
           });
       }
 
-      // Submit the form using Fetch (PUT)
+
       document.getElementById("editStudentForm").addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent form default submission
+        e.preventDefault();
 
         const formData = {
           student_id: document.getElementById("student_id").value,
@@ -125,11 +124,11 @@ require 'dbcon.php';
         })
           .then(res => res.json())
           .then(data => {
-            // Remove old alerts if any
+
             const oldAlert = document.querySelector('.dynamic-alert');
             if (oldAlert) oldAlert.remove();
 
-            // Create Bootstrap alert
+
             const alertDiv = document.createElement('div');
             alertDiv.className = `alert alert-${data.success ? 'success' : 'danger'} alert-dismissible fade show dynamic-alert`;
             alertDiv.role = 'alert';
@@ -138,11 +137,10 @@ require 'dbcon.php';
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             `;
 
-            // Insert alert above the form
+
             const container = document.querySelector('.container.mt-5');
             container.insertBefore(alertDiv, container.firstChild);
 
-            // Redirect if success
             if (data.success) {
               setTimeout(() => {
                 window.location.href = "index.php";
@@ -156,4 +154,5 @@ require 'dbcon.php';
     });
   </script>
 </body>
+
 </html>

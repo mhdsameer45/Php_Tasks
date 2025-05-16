@@ -14,7 +14,7 @@ session_start();
   <body>
     <div class="container mt-5">
 
-        <div id="responseMessage"></div> <!-- For displaying success/error message -->
+        <div id="responseMessage"></div> 
 
         <div class="row">
             <div class="col-md-12">

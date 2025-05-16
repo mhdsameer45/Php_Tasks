@@ -2,7 +2,7 @@
 require 'dbcon.php';
 header('Content-Type: application/json');
 
-// Read raw JSON input
+
 $rawData = file_get_contents("php://input");
 $data = json_decode($rawData, true);
 
